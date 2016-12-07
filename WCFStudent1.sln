@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFStudent1", "WCFStudent1\WCFStudent1.csproj", "{2CB2B901-226A-4446-B981-34228E248374}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFStudent", "WPFStudent\WPFStudent.csproj", "{D3FB2B87-707F-4D5D-9B2D-2EB65E089F13}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2CB2B901-226A-4446-B981-34228E248374} = {2CB2B901-226A-4446-B981-34228E248374}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CB2B901-226A-4446-B981-34228E248374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CB2B901-226A-4446-B981-34228E248374}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CB2B901-226A-4446-B981-34228E248374}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CB2B901-226A-4446-B981-34228E248374}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3FB2B87-707F-4D5D-9B2D-2EB65E089F13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3FB2B87-707F-4D5D-9B2D-2EB65E089F13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3FB2B87-707F-4D5D-9B2D-2EB65E089F13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3FB2B87-707F-4D5D-9B2D-2EB65E089F13}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

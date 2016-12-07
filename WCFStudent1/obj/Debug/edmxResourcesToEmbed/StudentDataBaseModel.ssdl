@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblResults">
+    <Key>
+      <PropertyRef Name="ResultID" />
+    </Key>
+    <Property Name="ResultID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="StudentID" Type="int" />
+    <Property Name="SubjectID" Type="int" />
+    <Property Name="StudentName" Type="nvarchar" MaxLength="30" />
+    <Property Name="SubjectName" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="tblStudent">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IndexNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="70" />
+    <Property Name="JMBG" Type="nvarchar" MaxLength="13" />
+    <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+    <Property Name="BirthDate" Type="datetime" />
+    <Property Name="StudentSurname" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblSubject">
+    <Key>
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="SubjectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubjectName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Professor" Type="nvarchar" MaxLength="50" />
+    <Property Name="Semestre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Student.dbo.vwResult' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwResult">
+    <Key>
+      <PropertyRef Name="ResultID" />
+      <PropertyRef Name="Expr1" />
+      <PropertyRef Name="Expr2" />
+    </Key>
+    <Property Name="ResultID" Type="int" Nullable="false" />
+    <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="StudentID" Type="int" />
+    <Property Name="SubjectID" Type="int" />
+    <Property Name="StudentName" Type="nvarchar" MaxLength="30" />
+    <Property Name="SubjectName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Expr1" Type="int" Nullable="false" />
+    <Property Name="Expr2" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Student.dbo.vwStudent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwStudent">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IndexNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="City" Type="nvarchar" MaxLength="50" />
+    <Property Name="Adress" Type="nvarchar" MaxLength="70" />
+    <Property Name="JMBG" Type="nvarchar" MaxLength="13" />
+    <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+    <Property Name="BirthDate" Type="datetime" />
+    <Property Name="StudentSurname" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Student.dbo.vwSubject' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwSubject">
+    <Key>
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="SubjectID" Type="int" Nullable="false" />
+    <Property Name="SubjectName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Professor" Type="nvarchar" MaxLength="50" />
+    <Property Name="Semestre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_tblResults_tblStudent">
+    <End Role="tblStudent" Type="Self.tblStudent" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblResults" Type="Self.tblResults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStudent">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="tblResults">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblResults_tblSubject">
+    <End Role="tblSubject" Type="Self.tblSubject" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblResults" Type="Self.tblResults" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSubject">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="tblResults">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StudentModelStoreContainer">
+    <EntitySet Name="tblResults" EntityType="Self.tblResults" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblStudent" EntityType="Self.tblStudent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSubject" EntityType="Self.tblSubject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vwResult" EntityType="Self.vwResult" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwResult].[ResultID] AS [ResultID], 
+    [vwResult].[Grade] AS [Grade], 
+    [vwResult].[Date] AS [Date], 
+    [vwResult].[StudentID] AS [StudentID], 
+    [vwResult].[SubjectID] AS [SubjectID], 
+    [vwResult].[StudentName] AS [StudentName], 
+    [vwResult].[SubjectName] AS [SubjectName], 
+    [vwResult].[Expr1] AS [Expr1], 
+    [vwResult].[Expr2] AS [Expr2]
+    FROM [dbo].[vwResult] AS [vwResult]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwStudent" EntityType="Self.vwStudent" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwStudent].[StudentID] AS [StudentID], 
+    [vwStudent].[StudentName] AS [StudentName], 
+    [vwStudent].[IndexNumber] AS [IndexNumber], 
+    [vwStudent].[City] AS [City], 
+    [vwStudent].[Adress] AS [Adress], 
+    [vwStudent].[JMBG] AS [JMBG], 
+    [vwStudent].[Sex] AS [Sex], 
+    [vwStudent].[BirthDate] AS [BirthDate], 
+    [vwStudent].[StudentSurname] AS [StudentSurname]
+    FROM [dbo].[vwStudent] AS [vwStudent]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vwSubject" EntityType="Self.vwSubject" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwSubject].[SubjectID] AS [SubjectID], 
+    [vwSubject].[SubjectName] AS [SubjectName], 
+    [vwSubject].[Professor] AS [Professor], 
+    [vwSubject].[Semestre] AS [Semestre]
+    FROM [dbo].[vwSubject] AS [vwSubject]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_tblResults_tblStudent" Association="Self.FK_tblResults_tblStudent">
+      <End Role="tblStudent" EntitySet="tblStudent" />
+      <End Role="tblResults" EntitySet="tblResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblResults_tblSubject" Association="Self.FK_tblResults_tblSubject">
+      <End Role="tblSubject" EntitySet="tblSubject" />
+      <End Role="tblResults" EntitySet="tblResults" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

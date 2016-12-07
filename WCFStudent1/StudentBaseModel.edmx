@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StudentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblResults">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="StudentID" Type="int" />
+          <Property Name="SubjectID" Type="int" />
+          <Property Name="StudentName" Type="nvarchar" MaxLength="30" />
+          <Property Name="SubjectName" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tblStudent">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IndexNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="70" />
+          <Property Name="JMBG" Type="nvarchar" MaxLength="13" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="StudentSurname" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblSubject">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectName" Type="nvarchar" MaxLength="30" />
+          <Property Name="Professor" Type="nvarchar" MaxLength="50" />
+          <Property Name="Semestre" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Student.dbo.vwResult' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwResult">
+          <Key>
+            <PropertyRef Name="ResultID" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="Expr2" />
+          </Key>
+          <Property Name="ResultID" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="StudentID" Type="int" />
+          <Property Name="SubjectID" Type="int" />
+          <Property Name="StudentName" Type="nvarchar" MaxLength="30" />
+          <Property Name="SubjectName" Type="nvarchar" MaxLength="30" />
+          <Property Name="Expr1" Type="int" Nullable="false" />
+          <Property Name="Expr2" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Student.dbo.vwStudent' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwStudent">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IndexNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="70" />
+          <Property Name="JMBG" Type="nvarchar" MaxLength="13" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="StudentSurname" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Student.dbo.vwSubject' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwSubject">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="int" Nullable="false" />
+          <Property Name="SubjectName" Type="nvarchar" MaxLength="30" />
+          <Property Name="Professor" Type="nvarchar" MaxLength="50" />
+          <Property Name="Semestre" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_tblResults_tblStudent">
+          <End Role="tblStudent" Type="Self.tblStudent" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblResults" Type="Self.tblResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="tblResults">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblResults_tblSubject">
+          <End Role="tblSubject" Type="Self.tblSubject" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblResults" Type="Self.tblResults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSubject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="tblResults">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StudentModelStoreContainer">
+          <EntitySet Name="tblResults" EntityType="Self.tblResults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblStudent" EntityType="Self.tblStudent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSubject" EntityType="Self.tblSubject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwResult" EntityType="Self.vwResult" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwResult].[ResultID] AS [ResultID], 
+    [vwResult].[Grade] AS [Grade], 
+    [vwResult].[Date] AS [Date], 
+    [vwResult].[StudentID] AS [StudentID], 
+    [vwResult].[SubjectID] AS [SubjectID], 
+    [vwResult].[StudentName] AS [StudentName], 
+    [vwResult].[SubjectName] AS [SubjectName], 
+    [vwResult].[Expr1] AS [Expr1], 
+    [vwResult].[Expr2] AS [Expr2]
+    FROM [dbo].[vwResult] AS [vwResult]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwStudent" EntityType="Self.vwStudent" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwStudent].[StudentID] AS [StudentID], 
+    [vwStudent].[StudentName] AS [StudentName], 
+    [vwStudent].[IndexNumber] AS [IndexNumber], 
+    [vwStudent].[City] AS [City], 
+    [vwStudent].[Adress] AS [Adress], 
+    [vwStudent].[JMBG] AS [JMBG], 
+    [vwStudent].[Sex] AS [Sex], 
+    [vwStudent].[BirthDate] AS [BirthDate], 
+    [vwStudent].[StudentSurname] AS [StudentSurname]
+    FROM [dbo].[vwStudent] AS [vwStudent]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwSubject" EntityType="Self.vwSubject" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwSubject].[SubjectID] AS [SubjectID], 
+    [vwSubject].[SubjectName] AS [SubjectName], 
+    [vwSubject].[Professor] AS [Professor], 
+    [vwSubject].[Semestre] AS [Semestre]
+    FROM [dbo].[vwSubject] AS [vwSubject]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_tblResults_tblStudent" Association="Self.FK_tblResults_tblStudent">
+            <End Role="tblStudent" EntitySet="tblStudent" />
+            <End Role="tblResults" EntitySet="tblResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblResults_tblSubject" Association="Self.FK_tblResults_tblSubject">
+            <End Role="tblSubject" EntitySet="tblSubject" />
+            <End Role="tblResults" EntitySet="tblResults" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StudentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblResult">
+          <Key>
+            <PropertyRef Name="ResultID" />
+          </Key>
+          <Property Name="ResultID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Grade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="StudentID" Type="Int32" />
+          <Property Name="SubjectID" Type="Int32" />
+          <Property Name="StudentName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblStudent" Relationship="Self.FK_tblResults_tblStudent" FromRole="tblResults" ToRole="tblStudent" />
+          <NavigationProperty Name="tblSubject" Relationship="Self.FK_tblResults_tblSubject" FromRole="tblResults" ToRole="tblSubject" />
+        </EntityType>
+        <EntityType Name="tblStudent">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IndexNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="JMBG" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="StudentSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblResults" Relationship="Self.FK_tblResults_tblStudent" FromRole="tblStudent" ToRole="tblResults" />
+        </EntityType>
+        <EntityType Name="tblSubject">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Professor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Semestre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblResults" Relationship="Self.FK_tblResults_tblSubject" FromRole="tblSubject" ToRole="tblResults" />
+        </EntityType>
+        <EntityType Name="vwResult">
+          <Key>
+            <PropertyRef Name="ResultID" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="Expr2" />
+          </Key>
+          <Property Name="ResultID" Type="Int32" Nullable="false" />
+          <Property Name="Grade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="StudentID" Type="Int32" />
+          <Property Name="SubjectID" Type="Int32" />
+          <Property Name="StudentName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SubjectName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Expr1" Type="Int32" Nullable="false" />
+          <Property Name="Expr2" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwStudent">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IndexNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="JMBG" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="StudentSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vwSubject">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="Int32" Nullable="false" />
+          <Property Name="SubjectName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Professor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Semestre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_tblResults_tblStudent">
+          <End Role="tblStudent" Type="Self.tblStudent" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblResults" Type="Self.tblResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblStudent">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="tblResults">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblResults_tblSubject">
+          <End Role="tblSubject" Type="Self.tblSubject" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblResults" Type="Self.tblResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblSubject">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="tblResults">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StudentEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblResults" EntityType="Self.tblResult" />
+          <EntitySet Name="tblStudents" EntityType="Self.tblStudent" />
+          <EntitySet Name="tblSubjects" EntityType="Self.tblSubject" />
+          <EntitySet Name="vwResults" EntityType="Self.vwResult" />
+          <EntitySet Name="vwStudents" EntityType="Self.vwStudent" />
+          <EntitySet Name="vwSubjects" EntityType="Self.vwSubject" />
+          <AssociationSet Name="FK_tblResults_tblStudent" Association="Self.FK_tblResults_tblStudent">
+            <End Role="tblStudent" EntitySet="tblStudents" />
+            <End Role="tblResults" EntitySet="tblResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblResults_tblSubject" Association="Self.FK_tblResults_tblSubject">
+            <End Role="tblSubject" EntitySet="tblSubjects" />
+            <End Role="tblResults" EntitySet="tblResults" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StudentModelStoreContainer" CdmEntityContainer="StudentEntities2">
+          <EntitySetMapping Name="tblResults">
+            <EntityTypeMapping TypeName="StudentModel.tblResult">
+              <MappingFragment StoreEntitySet="tblResults">
+                <ScalarProperty Name="ResultID" ColumnName="ResultID" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblStudents">
+            <EntityTypeMapping TypeName="StudentModel.tblStudent">
+              <MappingFragment StoreEntitySet="tblStudent">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="IndexNumber" ColumnName="IndexNumber" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="StudentSurname" ColumnName="StudentSurname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblSubjects">
+            <EntityTypeMapping TypeName="StudentModel.tblSubject">
+              <MappingFragment StoreEntitySet="tblSubject">
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="Professor" ColumnName="Professor" />
+                <ScalarProperty Name="Semestre" ColumnName="Semestre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwResults">
+            <EntityTypeMapping TypeName="StudentModel.vwResult">
+              <MappingFragment StoreEntitySet="vwResult">
+                <ScalarProperty Name="ResultID" ColumnName="ResultID" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwStudents">
+            <EntityTypeMapping TypeName="StudentModel.vwStudent">
+              <MappingFragment StoreEntitySet="vwStudent">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="IndexNumber" ColumnName="IndexNumber" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="JMBG" ColumnName="JMBG" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="StudentSurname" ColumnName="StudentSurname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwSubjects">
+            <EntityTypeMapping TypeName="StudentModel.vwSubject">
+              <MappingFragment StoreEntitySet="vwSubject">
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="Professor" ColumnName="Professor" />
+                <ScalarProperty Name="Semestre" ColumnName="Semestre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

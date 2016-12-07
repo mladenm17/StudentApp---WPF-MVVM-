@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WCFStudent1" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCFStudent1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfvwResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="vwResult" nillable="true" type="tns:vwResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfvwResult" nillable="true" type="tns:ArrayOfvwResult" />
+  <xs:complexType name="vwResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Expr1" type="xs:int" />
+      <xs:element minOccurs="0" name="Expr2" type="xs:int" />
+      <xs:element minOccurs="0" name="Grade" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ResultID" type="xs:int" />
+      <xs:element minOccurs="0" name="StudentID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="StudentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SubjectID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SubjectName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="vwResult" nillable="true" type="tns:vwResult" />
+  <xs:complexType name="vwSubject">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Professor" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Semestre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SubjectID" type="xs:int" />
+      <xs:element minOccurs="0" name="SubjectName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="vwSubject" nillable="true" type="tns:vwSubject" />
+  <xs:complexType name="ArrayOfvwSubject">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="vwSubject" nillable="true" type="tns:vwSubject" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfvwSubject" nillable="true" type="tns:ArrayOfvwSubject" />
+  <xs:complexType name="vwStudent">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Adress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BirthDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IndexNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="JMBG" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sex" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StudentID" type="xs:int" />
+      <xs:element minOccurs="0" name="StudentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StudentSurname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="vwStudent" nillable="true" type="tns:vwStudent" />
+  <xs:complexType name="ArrayOfvwStudent">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="vwStudent" nillable="true" type="tns:vwStudent" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfvwStudent" nillable="true" type="tns:ArrayOfvwStudent" />
+</xs:schema>

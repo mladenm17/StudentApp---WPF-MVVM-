@@ -1,0 +1,24 @@
+﻿<Window x:Class="WPFStudent.AddResult"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFStudent.ViewModels"
+        Title="AddResult" Height="300" Width="300">
+    <Window.DataContext>
+        <local:AddResultViewModel></local:AddResultViewModel>
+    </Window.DataContext>
+    <Grid>
+        <ComboBox HorizontalAlignment="Left" Margin="113,21,0,0" Name="cmbStudent" DisplayMemberPath="StudentName" IsEditable="false" ItemsSource="{Binding StudentsList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding Student, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <Label Name="lblvalidName" Content="*"  Foreground="#FFFB0000" FontSize="20" Margin="233,16,-233,-16"/>
+        <Label Name="lblvalidName2" Content="*"  Foreground="#FFFB0000" FontSize="20" Margin="233,61,-233,-61" />
+        <ComboBox HorizontalAlignment="Left" Margin="113,66,0,0" Name="cmbSubject" DisplayMemberPath="SubjectName" IsEditable="false" ItemsSource="{Binding SubjectsList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding Subject, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Text="{Binding Result.Grade, UpdateSourceTrigger=PropertyChanged}" Height="23" Margin="113,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Grade" Name="lblGrade" HorizontalAlignment="Left" Margin="18,116,0,0" VerticalAlignment="Top"/>
+        <DatePicker HorizontalAlignment="Left" Name="dpDate" SelectedDate="{Binding Result.Date, UpdateSourceTrigger=PropertyChanged}" Margin="113,167,0,0" VerticalAlignment="Top"/>
+        <Button  Name="btnSave" Content="Save" Height="20" Width="70" HorizontalAlignment="Left" Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}" Margin="29,222,0,28" />
+        <Button  Name="btnClose" Content="Close" Height="20" Width="70" HorizontalAlignment="Right" Command="{Binding Close, UpdateSourceTrigger=PropertyChanged}" Margin="0,222,59,28" />
+        <Label Content="Date&#xD;&#xA;" Name="lblDate" HorizontalAlignment="Left" Margin="18,166,0,0" VerticalAlignment="Top"/>
+        <Label Content="Student Name" Name="lblStudentName" HorizontalAlignment="Left" Margin="16,21,0,0" VerticalAlignment="Top"/>
+        <Label Content="Subject Name&#xD;&#xA;" Name="lblSubjectName" HorizontalAlignment="Left" Margin="16,66,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

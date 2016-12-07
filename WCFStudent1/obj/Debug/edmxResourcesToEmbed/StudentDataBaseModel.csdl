@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblResult">
+    <Key>
+      <PropertyRef Name="ResultID" />
+    </Key>
+    <Property Name="ResultID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Grade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="StudentID" Type="Int32" />
+    <Property Name="SubjectID" Type="Int32" />
+    <Property Name="StudentName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="SubjectName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblStudent" Relationship="Self.FK_tblResults_tblStudent" FromRole="tblResults" ToRole="tblStudent" />
+    <NavigationProperty Name="tblSubject" Relationship="Self.FK_tblResults_tblSubject" FromRole="tblResults" ToRole="tblSubject" />
+  </EntityType>
+  <EntityType Name="tblStudent">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IndexNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Adress" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="JMBG" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDate" Type="DateTime" Precision="3" />
+    <Property Name="StudentSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblResults" Relationship="Self.FK_tblResults_tblStudent" FromRole="tblStudent" ToRole="tblResults" />
+  </EntityType>
+  <EntityType Name="tblSubject">
+    <Key>
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="SubjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubjectName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Professor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Semestre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblResults" Relationship="Self.FK_tblResults_tblSubject" FromRole="tblSubject" ToRole="tblResults" />
+  </EntityType>
+  <EntityType Name="vwResult">
+    <Key>
+      <PropertyRef Name="ResultID" />
+      <PropertyRef Name="Expr1" />
+      <PropertyRef Name="Expr2" />
+    </Key>
+    <Property Name="ResultID" Type="Int32" Nullable="false" />
+    <Property Name="Grade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="StudentID" Type="Int32" />
+    <Property Name="SubjectID" Type="Int32" />
+    <Property Name="StudentName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="SubjectName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Expr1" Type="Int32" Nullable="false" />
+    <Property Name="Expr2" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vwStudent">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IndexNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Adress" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="JMBG" Type="String" MaxLength="13" FixedLength="false" Unicode="true" />
+    <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDate" Type="DateTime" Precision="3" />
+    <Property Name="StudentSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vwSubject">
+    <Key>
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="SubjectID" Type="Int32" Nullable="false" />
+    <Property Name="SubjectName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Professor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Semestre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_tblResults_tblStudent">
+    <End Role="tblStudent" Type="Self.tblStudent" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblResults" Type="Self.tblResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblStudent">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="tblResults">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblResults_tblSubject">
+    <End Role="tblSubject" Type="Self.tblSubject" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblResults" Type="Self.tblResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSubject">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="tblResults">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StudentEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblResults" EntityType="Self.tblResult" />
+    <EntitySet Name="tblStudents" EntityType="Self.tblStudent" />
+    <EntitySet Name="tblSubjects" EntityType="Self.tblSubject" />
+    <EntitySet Name="vwResults" EntityType="Self.vwResult" />
+    <EntitySet Name="vwStudents" EntityType="Self.vwStudent" />
+    <EntitySet Name="vwSubjects" EntityType="Self.vwSubject" />
+    <AssociationSet Name="FK_tblResults_tblStudent" Association="Self.FK_tblResults_tblStudent">
+      <End Role="tblStudent" EntitySet="tblStudents" />
+      <End Role="tblResults" EntitySet="tblResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblResults_tblSubject" Association="Self.FK_tblResults_tblSubject">
+      <End Role="tblSubject" EntitySet="tblSubjects" />
+      <End Role="tblResults" EntitySet="tblResults" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
